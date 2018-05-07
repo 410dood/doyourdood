@@ -1,13 +1,13 @@
 {
-  "name": "reddit-clone-mern",
+  "name": "doyourdood",
   "version": "1.0.0",
-  "description": "Reddit clone using MERN stack",
+  "description": "REST API",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Bill Doody",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
