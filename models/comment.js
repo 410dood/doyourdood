@@ -1,14 +1,11 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// Add your comment model here
 
-// Define collection and schema for Comment
-var Comment = new Schema({
-    comment: {
-        type: String
-    },
-    age: {
-        type: Number
-    }
-}, {collection: 'comments'});
+var mongoose = require('mongoose'),
 
-module.exports = mongoose.model('Comment', Comment);
+  Schema = mongoose.Schema;
+
+var CommentSchema = new Schema({content: String, votes: Number});
+
+var Comment = mongoose.model('Comment', CommentSchema);
+
+module.exports = Comment;

@@ -1,27 +1,23 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const app = express();
-const config = require('./db/db');
-const Comment = require('./models/Comment');
-const CommentRoute = require('./routes/CommentRoute');
+require('dotenv').config();
 
-const PORT = 3000;
+var express = require('express');
+var app = express();
+var redditRouter = require('./config/routes.js');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+  next();
+});
+
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-mongoose
-    .connect(config.DB)
-    .then(() => {
-        console.log('doyourdood database is connected')
-    }, err => {
-        console.log('Can not connect to the database' + err)
-    });
+app.use(redditRouter);
 
-//middleware
-app.use(bodyParser.json());
-app.use('/comment', CommentRoute);
+let port = process.env.PORT || 3000;
 
-app.listen(PORT, function () {
-    console.log('doyourdood nodejs server is running on PORT: ', PORT);
+app.listen(port, function() {
+  console.log(`Listening on port ${ port }`);
 });
